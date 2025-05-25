@@ -3,287 +3,784 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi Página Personal - [Tu Nombre]</title>
+    <title>Shyrly Zarai - Mi Mundo Invernal</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Montserrat:wght@300;400&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
     <style>
+        :root {
+            --azul-primario: #4FC3F7;
+            --azul-secundario: #0288D1;
+            --azul-oscuro: #01579B;
+            --azul-claro: #B3E5FC;
+            --azul-pastel: #E1F5FE;
+            --azul-neon: #00B4FF;
+            --contraste-blanco: #FFFFFF;
+            --contraste-negro: #263238;
+            --acento-azul: #00BCD4;
+        }
+        
         body {
-            font-family: 'Arial', sans-serif;
-            background: linear-gradient(to bottom, #e0f7fa, #b2ebf2, #80deea);
-            color: #01579b;
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.8;
             margin: 0;
             padding: 0;
+            color: var(--contraste-negro);
+            background-color: var(--azul-pastel);
             min-height: 100vh;
             overflow-x: hidden;
-        }
-
-        header {
-            background-color: rgba(255, 255, 255, 0.8);
-            padding: 20px;
-            text-align: center;
-            border-bottom: 3px solid #4fc3f7;
-            box-shadow: 0 4px 12px rgba(0, 150, 199, 0.2);
-        }
-
-        h1 {
-            margin: 0;
-            color: #006064;
-            font-size: 2.5em;
-            text-shadow: 1px 1px 2px #b2ebf2;
-        }
-
-        .container {
-            max-width: 900px;
-            margin: 30px auto;
-            padding: 20px;
-            background-color: rgba(255, 255, 255, 0.85);
-            border-radius: 15px;
-            box-shadow: 0 8px 16px rgba(0, 150, 199, 0.15);
             position: relative;
-            z-index: 1;
+            background-image: 
+                radial-gradient(circle at 10% 20%, rgba(255,255,255,0.8) 0%, transparent 20%),
+                radial-gradient(circle at 90% 80%, rgba(255,255,255,0.8) 0%, transparent 20%);
         }
 
-        .section {
-            margin-bottom: 30px;
-            padding: 20px;
-            border-radius: 10px;
-            background-color: rgba(236, 239, 241, 0.6);
-            border-left: 5px solid #00bcd4;
-        }
-
-        h2 {
-            color: #00838f;
-            border-bottom: 2px dashed #4dd0e1;
-            padding-bottom: 5px;
-        }
-
-        ul {
-            list-style-type: none;
-            padding-left: 20px;
-        }
-
-        li {
-            margin-bottom: 8px;
-            position: relative;
-            padding-left: 25px;
-        }
-
-        li:before {
-            content: "❄";
-            position: absolute;
-            left: 0;
-            color: #00bcd4;
-        }
-
-        a {
-            color: #0277bd;
-            text-decoration: none;
-            transition: all 0.3s;
-        }
-
-        a:hover {
-            color: #0288d1;
-            text-decoration: underline;
-        }
-
-        .snowman {
-            position: absolute;
-            z-index: 2;
-        }
-
-        .snowman-1 {
-            bottom: 20px;
-            right: 50px;
-            width: 100px;
-        }
-
-        .snowman-2 {
-            bottom: 20px;
-            left: 50px;
-            width: 80px;
-        }
-
+        /* Copos de nieve */
         .snowflake {
             position: fixed;
-            color: #b2ebf2;
-            user-select: none;
-            z-index: 0;
-            animation: fall linear infinite;
+            width: 20px;
+            height: 20px;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path fill="%23FFFFFF" d="M50,0 L50,100 M0,50 L100,50 M25,25 L75,75 M75,25 L25,75" stroke="%234FC3F7" stroke-width="8" stroke-linecap="round"/></svg>');
+            background-size: contain;
+            z-index: -1;
+            animation: falling linear infinite;
+            opacity: 0.8;
+            filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.1));
         }
 
-        @keyframes fall {
+        /* Muñecos de nieve flotantes */
+        .snowman-float {
+            position: fixed;
+            width: 80px;
+            height: 120px;
+            z-index: -1;
+            animation: floatSnowman linear infinite;
+            opacity: 0.7;
+        }
+
+        @keyframes falling {
             0% {
-                transform: translateY(-10vh) rotate(0deg);
-                opacity: 1;
+                transform: translate(0, -10vh) rotate(0deg) scale(1);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.8;
+            }
+            90% {
+                opacity: 0.8;
             }
             100% {
-                transform: translateY(110vh) rotate(360deg);
+                transform: translate(calc(50vw - 100px), 100vh) rotate(360deg) scale(1.2);
                 opacity: 0;
             }
         }
 
+        @keyframes floatSnowman {
+            0% {
+                transform: translate(0, -10vh) rotate(0deg) scale(1);
+                opacity: 0;
+            }
+            10% {
+                opacity: 0.7;
+            }
+            50% {
+                transform: translate(15vw, 50vh) rotate(5deg) scale(1.1);
+            }
+            90% {
+                opacity: 0.7;
+            }
+            100% {
+                transform: translate(calc(30vw - 100px), 100vh) rotate(0deg) scale(1);
+                opacity: 0;
+            }
+        }
+
+        /* Decoración de montañas */
+        .mountains {
+            position: fixed;
+            width: 100%;
+            height: 150px;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 150"><path fill="%23FFFFFF" d="M0,150 L200,50 L400,100 L600,20 L800,80 L1000,150 Z"/></svg>');
+            background-size: 100% 100%;
+            z-index: -1;
+            opacity: 0.3;
+            bottom: 0;
+        }
+
+        header {
+            background: linear-gradient(135deg, var(--azul-primario), var(--azul-oscuro));
+            color: var(--contraste-blanco);
+            padding: 40px 0;
+            text-align: center;
+            margin-bottom: 40px;
+            box-shadow: 0 4px 20px rgba(1, 87, 155, 0.3);
+            position: relative;
+            overflow: hidden;
+            border-bottom: 3px solid var(--azul-neon);
+        }
+        
+        header::after {
+            content: "❄";
+            position: absolute;
+            bottom: -25px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 2.5rem;
+            color: var(--contraste-blanco);
+            text-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+        }
+        
+        h1 {
+            margin: 0;
+            font-size: 3.2rem;
+            letter-spacing: 1px;
+            font-family: 'Dancing Script', cursive;
+            color: var(--contraste-blanco);
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            position: relative;
+            display: inline-block;
+            animation: pulseTitle 2s infinite alternate;
+        }
+
+        @keyframes pulseTitle {
+            0% { transform: scale(1); opacity: 0.9; }
+            100% { transform: scale(1.03); opacity: 1; text-shadow: 0 0 15px rgba(255, 255, 255, 0.7); }
+        }
+
+        .subtitle {
+            font-style: italic;
+            font-size: 1.3rem;
+            color: var(--contraste-blanco);
+            margin-top: 0.8rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .container {
+            width: 85%;
+            max-width: 1200px;
+            margin: 40px auto;
+            overflow: hidden;
+            position: relative;
+        }
+        
+        section {
+            background: rgba(255, 255, 255, 0.9);
+            padding: 35px;
+            margin-bottom: 35px;
+            border-radius: 8px;
+            box-shadow: 0 6px 18px rgba(0,0,0,0.1);
+            transition: all 0.4s ease;
+            border-left: 5px solid var(--azul-primario);
+            position: relative;
+            overflow: hidden;
+            backdrop-filter: blur(3px);
+        }
+
+        section::before {
+            content: "";
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            width: 60px;
+            height: 60px;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path fill="%234FC3F7" opacity="0.1" d="M50,0 Q60,40 90,50 Q60,60 50,100 Q40,60 10,50 Q40,40 50,0 Z"/></svg>');
+            background-size: contain;
+            background-repeat: no-repeat;
+            transform: rotate(15deg);
+        }
+        
+        section:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 25px rgba(79, 195, 247, 0.3);
+        }
+        
+        h2 {
+            color: var(--azul-oscuro);
+            padding-bottom: 10px;
+            font-size: 2.3rem;
+            display: inline-block;
+            margin-top: 0;
+            font-family: 'Playfair Display', serif;
+            position: relative;
+            font-weight: 700;
+        }
+
+        h2::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: linear-gradient(90deg, var(--azul-primario), var(--azul-secundario));
+            transform: scaleX(0);
+            transform-origin: left;
+            transition: transform 0.3s ease;
+        }
+
+        section:hover h2::after {
+            transform: scaleX(1);
+        }
+        
+        ul {
+            list-style-type: none;
+            padding: 0;
+        }
+        
+        li {
+            padding: 15px 0;
+            border-bottom: 1px dashed var(--azul-claro);
+            position: relative;
+            padding-left: 50px;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+
+        li:hover {
+            background-color: rgba(79, 195, 247, 0.05);
+            transform: translateX(5px);
+        }
+        
+        li::before {
+            content: "❄";
+            color: var(--azul-primario);
+            position: absolute;
+            left: 0;
+            top: 15px;
+            font-size: 1.8rem;
+            transition: all 0.3s ease;
+        }
+
+        li:hover::before {
+            transform: scale(1.5);
+            color: var(--azul-neon);
+        }
+        
+        a {
+            color: var(--azul-oscuro);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-weight: 600;
+            padding: 2px 4px;
+            border-radius: 4px;
+            background: linear-gradient(to right, transparent 50%, rgba(79, 195, 247, 0.1) 50%);
+            background-size: 200% 100%;
+            background-position: right bottom;
+        }
+        
+        a:hover {
+            color: var(--azul-primario);
+            background-position: left bottom;
+            text-decoration: underline;
+        }
+        
         footer {
             text-align: center;
-            padding: 20px;
-            background-color: rgba(255, 255, 255, 0.8);
-            border-top: 3px solid #4fc3f7;
-            margin-top: 30px;
+            padding: 30px;
+            background: linear-gradient(135deg, var(--azul-oscuro), var(--contraste-negro));
+            color: var(--contraste-blanco);
+            margin-top: 60px;
+            font-size: 1rem;
+            position: relative;
+            border-top: 3px solid var(--azul-neon);
         }
 
-        .compañeros-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
-            gap: 15px;
+        footer::before {
+            content: "";
+            position: absolute;
+            top: -20px;
+            left: 0;
+            width: 100%;
+            height: 20px;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 20"><path fill="%2301579B" d="M0,20 Q250,0 500,20 T1000,20 Z"/></svg>');
+            background-size: 100% 100%;
         }
-
-        .compañero-card {
-            background-color: rgba(178, 235, 242, 0.3);
-            padding: 15px;
+        
+        /* Estilo para la imagen centrada con animación */
+        .imagen-centrada {
+            display: block;
+            margin: 30px auto;
+            max-width: 100%;
+            width: 350px;
+            height: auto;
             border-radius: 8px;
-            transition: transform 0.3s, box-shadow 0.3s;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            border: 5px solid var(--contraste-blanco);
+            transition: all 0.5s ease;
+            position: relative;
+            overflow: hidden;
+            animation: floatImage 6s ease-in-out infinite;
+            filter: brightness(95%) contrast(110%) hue-rotate(-5deg);
         }
 
-        .compañero-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 5px 15px rgba(0, 150, 199, 0.2);
+        @keyframes floatImage {
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
+                box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            }
+            50% {
+                transform: translateY(-10px) rotate(1deg);
+                box-shadow: 0 15px 35px rgba(79, 195, 247, 0.4);
+            }
+        }
+
+        .imagen-centrada:hover {
+            animation: none;
+            transform: scale(1.05) rotate(2deg);
+            filter: brightness(100%) contrast(110%) hue-rotate(-5deg);
+            box-shadow: 0 15px 35px rgba(79, 195, 247, 0.6);
+        }
+        
+        .centered-text {
+            text-align: center;
+            margin: 25px 0;
+            position: relative;
+            font-family: 'Playfair Display', serif;
+            font-style: italic;
+            color: var(--azul-oscuro);
+            font-size: 1.2rem;
+        }
+
+        .centered-text::before,
+        .centered-text::after {
+            content: "❄";
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 1.5rem;
+            color: var(--azul-primario);
+            opacity: 0.6;
+        }
+
+        .centered-text::before {
+            left: 10%;
+        }
+
+        .centered-text::after {
+            right: 10%;
+        }
+        
+        .winter-btn {
+            display: inline-block;
+            background: linear-gradient(to right, var(--azul-primario), var(--azul-secundario));
+            color: var(--contraste-blanco);
+            padding: 12px 28px;
+            border-radius: 30px;
+            font-weight: 600;
+            letter-spacing: 1px;
+            margin: 20px 5px;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 0 var(--azul-oscuro);
+            border: none;
+            cursor: pointer;
+            position: relative;
+            overflow: hidden;
+            z-index: 1;
+            font-family: 'Playfair Display', serif;
+            font-size: 1.1rem;
+        }
+
+        .winter-btn::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: all 0.5s ease;
+            z-index: -1;
+        }
+        
+        .winter-btn:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 6px 0 var(--azul-oscuro);
+            background: linear-gradient(to right, var(--azul-neon), var(--azul-primario));
+        }
+
+        .winter-btn:hover::before {
+            left: 100%;
+        }
+        
+        .winter-btn:active {
+            transform: translateY(1px);
+            box-shadow: 0 2px 0 var(--azul-oscuro);
+        }
+
+        .pulse {
+            animation: pulseBtn 1.5s infinite alternate;
+        }
+        
+        @keyframes pulseBtn {
+            0% { transform: translateY(0); box-shadow: 0 4px 0 var(--azul-oscuro); }
+            100% { transform: translateY(-3px); box-shadow: 0 6px 0 var(--azul-oscuro), 0 0 15px rgba(79, 195, 247, 0.5); }
+        }
+
+        /* Muñeco de nieve decorativo */
+        .snowman {
+            position: fixed;
+            bottom: 20px;
+            right: 50px;
+            width: 100px;
+            z-index: -1;
+            opacity: 0.8;
+        }
+
+        .snowman svg {
+            filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.2));
+        }
+
+        @media (max-width: 768px) {
+            .container {
+                width: 95%;
+            }
+            
+            h1 {
+                font-size: 2.2rem;
+            }
+            
+            section {
+                padding: 25px;
+            }
+
+            .centered-text::before,
+            .centered-text::after {
+                display: none;
+            }
+            
+            .imagen-centrada {
+                width: 280px;
+            }
+            
+            .snowflake {
+                width: 15px;
+                height: 15px;
+            }
+            
+            .snowman-float {
+                width: 60px;
+                height: 90px;
+            }
         }
     </style>
 </head>
 <body>
-    <!-- Copos de nieve se generarán con JavaScript -->
-    
-    <!-- Muñeco de nieve 1 -->
-    <div class="snowman snowman-1">
-        <svg viewBox="0 0 100 150" xmlns="http://www.w3.org/2000/svg">
-            <!-- Cuerpo -->
-            <circle cx="50" cy="120" r="30" fill="white" stroke="#01579b" stroke-width="1.5"/>
-            <circle cx="50" cy="70" r="22" fill="white" stroke="#01579b" stroke-width="1.5"/>
-            <circle cx="50" cy="35" r="15" fill="white" stroke="#01579b" stroke-width="1.5"/>
-            
-            <!-- Ojos y boca -->
-            <circle cx="45" cy="30" r="2" fill="#01579b"/>
-            <circle cx="55" cy="30" r="2" fill="#01579b"/>
-            <path d="M42 40 Q50 45 58 40" stroke="#01579b" fill="transparent" stroke-width="1.5"/>
-            
-            <!-- Brazos -->
-            <line x1="20" y1="70" x2="5" y2="60" stroke="#8D6E63" stroke-width="3"/>
-            <line x1="80" y1="70" x2="95" y2="60" stroke="#8D6E63" stroke-width="3"/>
-            
-            <!-- Sombrero -->
-            <rect x="35" y="10" width="30" height="5" fill="#01579b"/>
-            <rect x="40" y="5" width="20" height="10" fill="#01579b"/>
-        </svg>
-    </div>
-    
-    <!-- Muñeco de nieve 2 -->
-    <div class="snowman snowman-2">
+    <!-- Copos de nieve -->
+    <div class="snowflake" style="left: 10%; animation-duration: 18s; animation-delay: 0s;"></div>
+    <div class="snowflake" style="left: 30%; animation-duration: 22s; animation-delay: 3s; transform: scale(1.2);"></div>
+    <div class="snowflake" style="left: 70%; animation-duration: 25s; animation-delay: 5s; transform: scale(1.5);"></div>
+    <div class="snowflake" style="left: 50%; animation-duration: 20s; animation-delay: 7s; transform: scale(1.3);"></div>
+    <div class="snowflake" style="left: 85%; animation-duration: 19s; animation-delay: 2s; transform: scale(1.1);"></div>
+
+    <!-- Muñecos de nieve flotantes -->
+    <div class="snowman-float" style="left: 15%; animation-duration: 20s; animation-delay: 1s;">
         <svg viewBox="0 0 80 120" xmlns="http://www.w3.org/2000/svg">
-            <!-- Cuerpo -->
-            <circle cx="40" cy="90" r="25" fill="white" stroke="#01579b" stroke-width="1.5"/>
-            <circle cx="40" cy="50" r="18" fill="white" stroke="#01579b" stroke-width="1.5"/>
-            <circle cx="40" cy="25" r="12" fill="white" stroke="#01579b" stroke-width="1.5"/>
-            
-            <!-- Ojos y boca -->
-            <circle cx="37" cy="22" r="1.5" fill="#01579b"/>
-            <circle cx="43" cy="22" r="1.5" fill="#01579b"/>
-            <circle cx="40" cy="28" r="1" fill="#01579b"/>
-            
-            <!-- Brazos -->
+            <circle cx="40" cy="90" r="25" fill="white" stroke="#01579B" stroke-width="1.5"/>
+            <circle cx="40" cy="50" r="18" fill="white" stroke="#01579B" stroke-width="1.5"/>
+            <circle cx="40" cy="25" r="12" fill="white" stroke="#01579B" stroke-width="1.5"/>
+            <circle cx="37" cy="22" r="1.5" fill="#01579B"/>
+            <circle cx="43" cy="22" r="1.5" fill="#01579B"/>
+            <circle cx="40" cy="28" r="1" fill="#01579B"/>
             <line x1="15" y1="50" x2="5" y2="45" stroke="#8D6E63" stroke-width="2"/>
             <line x1="65" y1="50" x2="75" y2="45" stroke="#8D6E63" stroke-width="2"/>
-            
-            <!-- Botones -->
-            <circle cx="40" cy="60" r="2" fill="#01579b"/>
-            <circle cx="40" cy="70" r="2" fill="#01579b"/>
+            <circle cx="40" cy="60" r="2" fill="#01579B"/>
+            <circle cx="40" cy="70" r="2" fill="#01579B"/>
+        </svg>
+    </div>
+    <div class="snowman-float" style="left: 65%; animation-duration: 22s; animation-delay: 2s;">
+        <svg viewBox="0 0 100 150" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="120" r="30" fill="white" stroke="#01579B" stroke-width="1.5"/>
+            <circle cx="50" cy="70" r="22" fill="white" stroke="#01579B" stroke-width="1.5"/>
+            <circle cx="50" cy="35" r="15" fill="white" stroke="#01579B" stroke-width="1.5"/>
+            <circle cx="45" cy="30" r="2" fill="#01579B"/>
+            <circle cx="55" cy="30" r="2" fill="#01579B"/>
+            <path d="M42 40 Q50 45 58 40" stroke="#01579B" fill="transparent" stroke-width="1.5"/>
+            <line x1="20" y1="70" x2="5" y2="60" stroke="#8D6E63" stroke-width="3"/>
+            <line x1="80" y1="70" x2="95" y2="60" stroke="#8D6E63" stroke-width="3"/>
+            <rect x="35" y="10" width="30" height="5" fill="#01579B"/>
+            <rect x="40" y="5" width="20" height="10" fill="#01579B"/>
+        </svg>
+    </div>
+
+    <!-- Montañas decorativas -->
+    <div class="mountains"></div>
+
+    <!-- Muñeco de nieve fijo -->
+    <div class="snowman">
+        <svg viewBox="0 0 100 150" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="120" r="30" fill="white" stroke="#01579B" stroke-width="1.5"/>
+            <circle cx="50" cy="70" r="22" fill="white" stroke="#01579B" stroke-width="1.5"/>
+            <circle cx="50" cy="35" r="15" fill="white" stroke="#01579B" stroke-width="1.5"/>
+            <circle cx="45" cy="30" r="2" fill="#01579B"/>
+            <circle cx="55" cy="30" r="2" fill="#01579B"/>
+            <path d="M42 40 Q50 45 58 40" stroke="#01579B" fill="transparent" stroke-width="1.5"/>
+            <line x1="20" y1="70" x2="5" y2="60" stroke="#8D6E63" stroke-width="3"/>
+            <line x1="80" y1="70" x2="95" y2="60" stroke="#8D6E63" stroke-width="3"/>
+            <rect x="35" y="10" width="30" height="5" fill="#01579B"/>
+            <rect x="40" y="5" width="20" height="10" fill="#01579B"/>
         </svg>
     </div>
 
     <header>
-        <h1>[Tu Nombre Completo]</h1>
+        <div class="container">
+            <h1>Shyrly Zarai Pacco Cruz</h1>
+            <p class="subtitle">« Como un copo de nieve en el viento invernal »</p>
+        </div>
     </header>
 
     <div class="container">
-        <section class="section">
+        <!-- Sección de imagen -->
+        <section id="profile">
+            <div class="centered-text">
+                Mi Viaje Universitario Invernal
+            </div>
+            <img src="Abril.jpg" alt="Shyrly Zarai" class="imagen-centrada">
+            <div class="centered-text">
+                « La vida es como el invierno: fría pero hermosa, dura pero transformadora »
+            </div>
+            <div style="text-align: center;">
+            </div>
+        </section>
+
+        <section id="personal-info">
             <h2>Datos Personales</h2>
             <ul>
-                <li><strong>Nombre:</strong> [Tu Nombre Completo]</li>
-                <li><strong>Carrera:</strong> [Tu Carrera]</li>
-                <li><strong>Universidad:</strong> [Nombre de tu Universidad]</li>
-                <li><strong>Semestre:</strong> [Número de semestre]</li>
+                <li><strong>Nombre:</strong> Shyrly Zarai Pacco Cruz</li>
+                <li><strong>Carrera:</strong> Contabilidad</li>
+                <li><strong>Universidad:</strong> Universidad Católica San Pablo</li>
+                <li><strong>Semestre Actual:</strong> Cuarto Semestre</li>
+                <li><strong>Lema:</strong> Como los copos de nieve, cada uno es único</li>
             </ul>
         </section>
 
-        <section class="section">
-            <h2>Cursos Actuales</h2>
+        <section id="current-courses">
+            <h2>Cursos en Estudio</h2>
             <ul>
-                <li>[Nombre del Curso 1]</li>
-                <li>[Nombre del Curso 2]</li>
-                <li>[Nombre del Curso 3]</li>
-                <li>[Nombre del Curso 4]</li>
-                <li>[Nombre del Curso 5]</li>
+                <li><strong>Moral</strong>
+                    <p>Maestro: <a href="https://www.linkedin.com/in/joseph-zea-castillo-37065b264/">Jose Efrain Zea Castillo</a></p>
+                </li>
+                <li><strong>Calculo en Varias Variables</strong>
+                    <p>Maestro: <a href="https://www.linkedin.com/in/matilde-pe%C3%B1a-casa-b93b46230/">Maltilde Peña Casa</a></p>
+                </li>
+                <li><strong>Pensamiento Computacional</strong>
+                    <p>Maestro: <a href="https://www.linkedin.com/in/ecuadrosv/">Ernesto Cuadros-Vargas</a></p>
+                </li>
+                <li><strong>Contabilidad III</strong>
+                    <p>Maestra: <a href="https://www.linkedin.com/in/jesus-atencio-muchica-3bb31235/">Jesus Conrado Atencio Muchica</a></p>
+                </li>
+                <li><strong>Legislacion Laboral</strong>
+                    <p>Maestro: <a href="https://www.linkedin.com/in/giovanna-m-garc%C3%ADa-jarufe/">Giovanna Maria Jarufe Garcias</a></p>
+                </li>
+                <li><strong>Legislacion Auditoria y Tributaria</strong>
+                    <p>Maestro: <a href="https://www.linkedin.com/in/sebastian-amat-y-le%C3%B3n-arispe-0a198a32/">Juan Sebastian Arispe Amat y Leon</a></p>
+                </li>
             </ul>
         </section>
 
-        <section class="section">
-            <h2>Compañeros de Clase</h2>
-            <div class="compañeros-grid">
-                <div class="compañero-card">
-                    <h3>Nombre Compañero 1</h3>
-                    <p><a href="[enlace a su página]" target="_blank">Visitar página</a></p>
-                </div>
-                <div class="compañero-card">
-                    <h3>Nombre Compañero 2</h3>
-                    <p><a href="[enlace a su página]" target="_blank">Visitar página</a></p>
-                </div>
-                <div class="compañero-card">
-                    <h3>Nombre Compañero 3</h3>
-                    <p><a href="[enlace a su página]" target="_blank">Visitar página</a></p>
-                </div>
-                <div class="compañero-card">
-                    <h3>Nombre Compañero 4</h3>
-                    <p><a href="[enlace a su página]" target="_blank">Visitar página</a></p>
-                </div>
-                <!-- Puedes agregar más compañeros según sea necesario -->
+        <section id="classmates">
+            <h2>Compañeros Universitarios</h2>
+            <div style="text-align: center;">
+                <button class="winter-btn">Compañero 1</button>
+                <button class="winter-btn">Compalero 2</button>
+                <button class="winter-btn">Compañero 3</button>
+                <button class="winter-btn">Compañero 4</button>
             </div>
         </section>
     </div>
 
     <footer>
-        <p>© 2023 [Tu Nombre] - Todos los derechos reservados</p>
+        <p>&copy; 2023 Shyrly Zarai Pacco Cruz - "Mi Mundo Invernal"</p>
+        <p>« Como el invierno, cada desafío nos prepara para una nueva primavera »</p>
     </footer>
 
     <script>
-        // Crear copos de nieve
-        function createSnowflakes() {
-            const snowflakesCount = 50;
-            const body = document.body;
+        // Crear más copos de nieve y muñecos
+        function createWinterElements() {
+            // Copos de nieve
+            for (let i = 0; i < 3; i++) {
+                setTimeout(() => {
+                    const flake = document.createElement('div');
+                    flake.className = 'snowflake';
+                    flake.style.left = Math.random() * 100 + 'vw';
+                    flake.style.animationDuration = (Math.random() * 15 + 15) + 's';
+                    flake.style.animationDelay = (Math.random() * 5) + 's';
+                    flake.style.opacity = Math.random() * 0.5 + 0.4;
+                    flake.style.transform = `scale(${Math.random() * 0.5 + 1})`;
+                    flake.style.width = (Math.random() * 20 + 15) + 'px';
+                    flake.style.height = (Math.random() * 20 + 15) + 'px';
+                    
+                    document.body.appendChild(flake);
+
+                    setTimeout(() => {
+                        flake.remove();
+                    }, 40000);
+                }, i * 3000);
+            }
             
-            for (let i = 0; i < snowflakesCount; i++) {
-                const snowflake = document.createElement('div');
-                snowflake.className = 'snowflake';
-                snowflake.innerHTML = '❄';
-                
-                // Tamaño aleatorio
-                const size = Math.random() * 1.5 + 0.5;
-                snowflake.style.fontSize = `${size}em`;
-                
-                // Posición inicial aleatoria
-                snowflake.style.left = `${Math.random() * 100}vw`;
-                
-                // Duración de animación aleatoria
-                const animationDuration = Math.random() * 10 + 5;
-                snowflake.style.animationDuration = `${animationDuration}s`;
-                
-                // Retraso de animación aleatorio
-                snowflake.style.animationDelay = `${Math.random() * 5}s`;
-                
-                // Opacidad aleatoria
-                snowflake.style.opacity = Math.random() * 0.7 + 0.3;
-                
-                body.appendChild(snowflake);
+            // Muñecos de nieve flotantes
+            for (let i = 0; i < 2; i++) {
+                setTimeout(() => {
+                    const snowman = document.createElement('div');
+                    snowman.className = 'snowman-float';
+                    snowman.style.left = Math.random() * 100 + 'vw';
+                    snowman.style.animationDuration = (Math.random() * 20 + 20) + 's';
+                    snowman.style.animationDelay = (Math.random() * 5) + 's';
+                    snowman.style.opacity = Math.random() * 0.4 + 0.3;
+                    snowman.style.width = (Math.random() * 40 + 60) + 'px';
+                    
+                    // SVG del muñeco de nieve
+                    const svgNS = "http://www.w3.org/2000/svg";
+                    const svg = document.createElementNS(svgNS, "svg");
+                    svg.setAttribute("viewBox", "0 0 100 150");
+                    svg.setAttribute("xmlns", svgNS);
+                    
+                    // Cuerpo del muñeco
+                    const body1 = document.createElementNS(svgNS, "circle");
+                    body1.setAttribute("cx", "50");
+                    body1.setAttribute("cy", "120");
+                    body1.setAttribute("r", "30");
+                    body1.setAttribute("fill", "white");
+                    body1.setAttribute("stroke", "#01579B");
+                    body1.setAttribute("stroke-width", "1.5");
+                    
+                    const body2 = document.createElementNS(svgNS, "circle");
+                    body2.setAttribute("cx", "50");
+                    body2.setAttribute("cy", "70");
+                    body2.setAttribute("r", "22");
+                    body2.setAttribute("fill", "white");
+                    body2.setAttribute("stroke", "#01579B");
+                    body2.setAttribute("stroke-width", "1.5");
+                    
+                    const head = document.createElementNS(svgNS, "circle");
+                    head.setAttribute("cx", "50");
+                    head.setAttribute("cy", "35");
+                    head.setAttribute("r", "15");
+                    head.setAttribute("fill", "white");
+                    head.setAttribute("stroke", "#01579B");
+                    head.setAttribute("stroke-width", "1.5");
+                    
+                    // Cara
+                    const eye1 = document.createElementNS(svgNS, "circle");
+                    eye1.setAttribute("cx", "45");
+                    eye1.setAttribute("cy", "30");
+                    eye1.setAttribute("r", "2");
+                    eye1.setAttribute("fill", "#01579B");
+                    
+                    const eye2 = document.createElementNS(svgNS, "circle");
+                    eye2.setAttribute("cx", "55");
+                    eye2.setAttribute("cy", "30");
+                    eye2.setAttribute("r", "2");
+                    eye2.setAttribute("fill", "#01579B");
+                    
+                    const mouth = document.createElementNS(svgNS, "path");
+                    mouth.setAttribute("d", "M42 40 Q50 45 58 40");
+                    mouth.setAttribute("stroke", "#01579B");
+                    mouth.setAttribute("fill", "transparent");
+                    mouth.setAttribute("stroke-width", "1.5");
+                    
+                    // Brazos
+                    const arm1 = document.createElementNS(svgNS, "line");
+                    arm1.setAttribute("x1", "20");
+                    arm1.setAttribute("y1", "70");
+                    arm1.setAttribute("x2", "5");
+                    arm1.setAttribute("y2", "60");
+                    arm1.setAttribute("stroke", "#8D6E63");
+                    arm1.setAttribute("stroke-width", "3");
+                    
+                    const arm2 = document.createElementNS(svgNS, "line");
+                    arm2.setAttribute("x1", "80");
+                    arm2.setAttribute("y1", "70");
+                    arm2.setAttribute("x2", "95");
+                    arm2.setAttribute("y2", "60");
+                    arm2.setAttribute("stroke", "#8D6E63");
+                    arm2.setAttribute("stroke-width", "3");
+                    
+                    // Sombrero
+                    const hat1 = document.createElementNS(svgNS, "rect");
+                    hat1.setAttribute("x", "35");
+                    hat1.setAttribute("y", "10");
+                    hat1.setAttribute("width", "30");
+                    hat1.setAttribute("height", "5");
+                    hat1.setAttribute("fill", "#01579B");
+                    
+                    const hat2 = document.createElementNS(svgNS, "rect");
+                    hat2.setAttribute("x", "40");
+                    hat2.setAttribute("y", "5");
+                    hat2.setAttribute("width", "20");
+                    hat2.setAttribute("height", "10");
+                    hat2.setAttribute("fill", "#01579B");
+                    
+                    // Ensamblar SVG
+                    svg.appendChild(body1);
+                    svg.appendChild(body2);
+                    svg.appendChild(head);
+                    svg.appendChild(eye1);
+                    svg.appendChild(eye2);
+                    svg.appendChild(mouth);
+                    svg.appendChild(arm1);
+                    svg.appendChild(arm2);
+                    svg.appendChild(hat1);
+                    svg.appendChild(hat2);
+                    
+                    snowman.appendChild(svg);
+                    document.body.appendChild(snowman);
+
+                    setTimeout(() => {
+                        snowman.remove();
+                    }, 50000);
+                }, i * 3500);
             }
         }
-        
-        // Llamar a la función cuando la página se cargue
-        window.addEventListener('load', createSnowflakes);
+
+        // Efecto de botones invernales
+        document.querySelectorAll('.winter-btn').forEach(button => {
+            button.addEventListener('mouseenter', () => {
+                button.classList.add('pulse');
+            });
+            
+            button.addEventListener('mouseleave', () => {
+                button.classList.remove('pulse');
+            });
+            
+            button.addEventListener('click', () => {
+                button.style.transform = 'translateY(2px)';
+                button.style.boxShadow = '0 2px 0 var(--azul-oscuro)';
+                setTimeout(() => {
+                    button.style.transform = 'translateY(-3px)';
+                    button.style.boxShadow = '0 6px 0 var(--azul-oscuro), 0 0 15px rgba(79, 195, 247, 0.5)';
+                }, 200);
+            });
+        });
+
+        // Iniciar efectos
+        document.addEventListener('DOMContentLoaded', () => {
+            createWinterElements();
+            setInterval(createWinterElements, 10000);
+            
+            // Efecto de título pulsante
+            const title = document.querySelector('h1');
+            setInterval(() => {
+                title.style.animation = 'none';
+                setTimeout(() => {
+                    title.style.animation = 'pulseTitle 2s infinite alternate';
+                }, 10);
+            }, 5000);
+        });
+
+        // Efecto de movimiento al pasar el mouse
+        document.addEventListener('mousemove', (e) => {
+            const elements = document.querySelectorAll('.snowflake, .snowman-float');
+            elements.forEach(el => {
+                const rect = el.getBoundingClientRect();
+                const x = rect.left + rect.width/2;
+                const y = rect.top + rect.height/2;
+                const distance = Math.sqrt(Math.pow(e.clientX - x, 2) + Math.pow(e.clientY - y, 2));
+                
+                if (distance < 150) {
+                    const scale = 1 + (100 - distance) / 100;
+                    el.style.transform = `translate(${(e.clientX - x)/8}px, ${(e.clientY - y)/8}px) scale(${scale})`;
+                }
+            });
+        });
     </script>
 </body>
 </html>
