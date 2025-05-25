@@ -33,67 +33,67 @@
                 radial-gradient(circle at 90% 80%, rgba(255,255,255,0.8) 0%, transparent 20%);
         }
 
-        /* Copos de nieve */
+        /* Copos de nieve con diseño más elaborado */
         .snowflake {
             position: fixed;
-            width: 20px;
-            height: 20px;
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path fill="%23FFFFFF" d="M50,0 L50,100 M0,50 L100,50 M25,25 L75,75 M75,25 L25,75" stroke="%234FC3F7" stroke-width="8" stroke-linecap="round"/></svg>');
+            width: 24px;
+            height: 24px;
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path fill="%23FFFFFF" d="M50,0 L50,100 M0,50 L100,50 M25,25 L75,75 M75,25 L25,75 M15,50 Q50,15 85,50 Q50,85 15,50 M35,50 Q50,35 65,50 Q50,65 35,50" stroke="%234FC3F7" stroke-width="4" stroke-linecap="round"/></svg>');
             background-size: contain;
             z-index: -1;
             animation: falling linear infinite;
-            opacity: 0.8;
-            filter: drop-shadow(2px 2px 4px rgba(0,0,0,0.1));
+            opacity: 0.9;
+            filter: drop-shadow(0 0 3px rgba(255,255,255,0.7));
+            transform-origin: center;
         }
 
-        /* Muñecos de nieve flotantes */
+        /* Muñecos de nieve flotantes con animación más dinámica */
         .snowman-float {
             position: fixed;
             width: 80px;
             height: 120px;
             z-index: -1;
-            animation: floatSnowman linear infinite;
-            opacity: 0.7;
+            animation: floatSnowman ease-in-out infinite;
+            opacity: 0.8;
+            filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.2));
         }
 
         @keyframes falling {
             0% {
-                transform: translate(0, -10vh) rotate(0deg) scale(1);
+                transform: translate(0, -10vh) rotate(0deg) scale(0.8);
                 opacity: 0;
             }
             10% {
-                opacity: 0.8;
+                opacity: 0.9;
+            }
+            50% {
+                transform: translate(15vw, 50vh) rotate(180deg) scale(1.2);
             }
             90% {
-                opacity: 0.8;
+                opacity: 0.9;
             }
             100% {
-                transform: translate(calc(50vw - 100px), 100vh) rotate(360deg) scale(1.2);
+                transform: translate(calc(30vw - 100px), 100vh) rotate(360deg) scale(0.8);
                 opacity: 0;
             }
         }
 
         @keyframes floatSnowman {
-            0% {
-                transform: translate(0, -10vh) rotate(0deg) scale(1);
-                opacity: 0;
+            0%, 100% {
+                transform: translateY(0) rotate(0deg);
             }
-            10% {
-                opacity: 0.7;
+            25% {
+                transform: translateY(-20px) rotate(2deg);
             }
             50% {
-                transform: translate(15vw, 50vh) rotate(5deg) scale(1.1);
+                transform: translateY(0) rotate(0deg);
             }
-            90% {
-                opacity: 0.7;
-            }
-            100% {
-                transform: translate(calc(30vw - 100px), 100vh) rotate(0deg) scale(1);
-                opacity: 0;
+            75% {
+                transform: translateY(-15px) rotate(-2deg);
             }
         }
 
-        /* Decoración de montañas */
+        /* Montañas con animación sutil */
         .mountains {
             position: fixed;
             width: 100%;
@@ -103,6 +103,12 @@
             z-index: -1;
             opacity: 0.3;
             bottom: 0;
+            animation: mountainMove 60s linear infinite;
+        }
+
+        @keyframes mountainMove {
+            0% { background-position-x: 0; }
+            100% { background-position-x: -1000px; }
         }
 
         header {
@@ -125,7 +131,13 @@
             transform: translateX(-50%);
             font-size: 2.5rem;
             color: var(--contraste-blanco);
-            text-shadow: 0 0 10px rgba(255, 255, 255, 0.7);
+            text-shadow: 0 0 15px rgba(255, 255, 255, 0.9);
+            animation: pulse 2s infinite alternate;
+        }
+
+        @keyframes pulse {
+            0% { transform: translateX(-50%) scale(1); opacity: 0.8; }
+            100% { transform: translateX(-50%) scale(1.2); opacity: 1; }
         }
         
         h1 {
@@ -134,15 +146,39 @@
             letter-spacing: 1px;
             font-family: 'Dancing Script', cursive;
             color: var(--contraste-blanco);
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+            text-shadow: 2px 2px 8px rgba(0,0,0,0.3);
             position: relative;
             display: inline-block;
-            animation: pulseTitle 2s infinite alternate;
+            animation: titleGlow 3s infinite alternate;
+            transition: all 0.5s ease;
+            background: linear-gradient(to right, #fff, #c1e8ff, #fff);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            background-size: 200% auto;
         }
 
-        @keyframes pulseTitle {
-            0% { transform: scale(1); opacity: 0.9; }
-            100% { transform: scale(1.03); opacity: 1; text-shadow: 0 0 15px rgba(255, 255, 255, 0.7); }
+        @keyframes titleGlow {
+            0% { 
+                text-shadow: 0 0 10px rgba(255,255,255,0.5),
+                            0 0 20px rgba(79, 195, 247, 0.3);
+                background-position: 0% center;
+            }
+            100% { 
+                text-shadow: 0 0 20px rgba(255,255,255,0.8),
+                            0 0 30px rgba(79, 195, 247, 0.6);
+                background-position: 100% center;
+            }
+        }
+
+        header:hover h1 {
+            animation: titleGlow 1s infinite alternate, shake 0.5s ease;
+        }
+
+        @keyframes shake {
+            0%, 100% { transform: translateX(0); }
+            25% { transform: translateX(-5px); }
+            75% { transform: translateX(5px); }
         }
 
         .subtitle {
@@ -150,8 +186,16 @@
             font-size: 1.3rem;
             color: var(--contraste-blanco);
             margin-top: 0.8rem;
-            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+            text-shadow: 1px 1px 4px rgba(0,0,0,0.3);
             font-family: 'Playfair Display', serif;
+            position: relative;
+            display: inline-block;
+            transition: all 0.3s ease;
+        }
+
+        header:hover .subtitle {
+            transform: translateY(-5px);
+            text-shadow: 0 0 10px rgba(255,255,255,0.7);
         }
         
         .container {
@@ -163,34 +207,33 @@
         }
         
         section {
-            background: rgba(255, 255, 255, 0.9);
+            background: rgba(255, 255, 255, 0.92);
             padding: 35px;
             margin-bottom: 35px;
-            border-radius: 8px;
-            box-shadow: 0 6px 18px rgba(0,0,0,0.1);
-            transition: all 0.4s ease;
+            border-radius: 12px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             border-left: 5px solid var(--azul-primario);
             position: relative;
             overflow: hidden;
-            backdrop-filter: blur(3px);
+            backdrop-filter: blur(5px);
+            transform-style: preserve-3d;
         }
 
         section::before {
             content: "";
             position: absolute;
-            top: 10px;
-            right: 10px;
-            width: 60px;
-            height: 60px;
-            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path fill="%234FC3F7" opacity="0.1" d="M50,0 Q60,40 90,50 Q60,60 50,100 Q40,60 10,50 Q40,40 50,0 Z"/></svg>');
-            background-size: contain;
-            background-repeat: no-repeat;
-            transform: rotate(15deg);
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(79, 195, 247, 0.05) 0%, transparent 100%);
+            z-index: -1;
         }
-        
+
         section:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 12px 25px rgba(79, 195, 247, 0.3);
+            transform: translateY(-10px) rotateX(1deg) rotateY(1deg);
+            box-shadow: 0 15px 35px rgba(79, 195, 247, 0.4);
         }
         
         h2 {
@@ -202,23 +245,29 @@
             font-family: 'Playfair Display', serif;
             position: relative;
             font-weight: 700;
+            transition: all 0.4s ease;
+            transform-origin: left center;
         }
 
-        h2::after {
+        h2::before {
             content: "";
             position: absolute;
             bottom: 0;
             left: 0;
-            width: 100%;
-            height: 2px;
+            width: 0;
+            height: 3px;
             background: linear-gradient(90deg, var(--azul-primario), var(--azul-secundario));
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 0.3s ease;
+            transition: width 0.4s ease;
         }
 
-        section:hover h2::after {
-            transform: scaleX(1);
+        section:hover h2::before {
+            width: 100%;
+        }
+
+        section:hover h2 {
+            color: var(--azul-secundario);
+            transform: scale(1.05) translateX(10px);
+            text-shadow: 2px 2px 5px rgba(79, 195, 247, 0.2);
         }
         
         ul {
@@ -232,12 +281,14 @@
             position: relative;
             padding-left: 50px;
             font-size: 1.1rem;
-            transition: all 0.3s ease;
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            transform-origin: left center;
         }
 
         li:hover {
-            background-color: rgba(79, 195, 247, 0.05);
-            transform: translateX(5px);
+            background-color: rgba(79, 195, 247, 0.08);
+            transform: translateX(10px) scale(1.02);
+            border-bottom-color: var(--azul-primario);
         }
         
         li::before {
@@ -247,30 +298,52 @@
             left: 0;
             top: 15px;
             font-size: 1.8rem;
-            transition: all 0.3s ease;
+            transition: all 0.4s ease;
+            animation: snowflakeSpin 4s linear infinite;
+        }
+
+        @keyframes snowflakeSpin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
         }
 
         li:hover::before {
-            transform: scale(1.5);
+            transform: scale(1.5) rotate(180deg);
             color: var(--azul-neon);
+            animation: snowflakeSpin 1s linear infinite;
         }
         
         a {
             color: var(--azul-oscuro);
             text-decoration: none;
-            transition: all 0.3s ease;
+            transition: all 0.4s ease;
             font-weight: 600;
             padding: 2px 4px;
             border-radius: 4px;
-            background: linear-gradient(to right, transparent 50%, rgba(79, 195, 247, 0.1) 50%);
-            background-size: 200% 100%;
-            background-position: right bottom;
+            position: relative;
+            overflow: hidden;
+        }
+
+        a::after {
+            content: "";
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 2px;
+            background: var(--azul-primario);
+            transform: scaleX(0);
+            transform-origin: right;
+            transition: transform 0.4s ease;
         }
         
         a:hover {
             color: var(--azul-primario);
-            background-position: left bottom;
-            text-decoration: underline;
+        }
+
+        a:hover::after {
+            transform: scaleX(1);
+            transform-origin: left;
         }
         
         footer {
@@ -293,41 +366,55 @@
             height: 20px;
             background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 20"><path fill="%2301579B" d="M0,20 Q250,0 500,20 T1000,20 Z"/></svg>');
             background-size: 100% 100%;
+            animation: mountainMove 30s linear infinite reverse;
         }
         
-        /* Estilo para la imagen centrada con animación */
+        /* Estilo para la imagen centrada con animación mejorada */
         .imagen-centrada {
             display: block;
             margin: 30px auto;
             max-width: 100%;
             width: 350px;
             height: auto;
-            border-radius: 8px;
-            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            border-radius: 50% 50% 8px 8px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.2);
             border: 5px solid var(--contraste-blanco);
-            transition: all 0.5s ease;
+            transition: all 0.6s cubic-bezier(0.175, 0.885, 0.32, 1.275);
             position: relative;
             overflow: hidden;
-            animation: floatImage 6s ease-in-out infinite;
+            animation: floatImage 8s ease-in-out infinite;
             filter: brightness(95%) contrast(110%) hue-rotate(-5deg);
+            transform-style: preserve-3d;
+        }
+
+        .imagen-centrada::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(135deg, rgba(79, 195, 247, 0.3) 0%, transparent 50%);
+            z-index: -1;
         }
 
         @keyframes floatImage {
             0%, 100% {
-                transform: translateY(0) rotate(0deg);
+                transform: translateY(0) rotate(0deg) rotateX(0deg);
                 box-shadow: 0 10px 25px rgba(0,0,0,0.15);
             }
             50% {
-                transform: translateY(-10px) rotate(1deg);
-                box-shadow: 0 15px 35px rgba(79, 195, 247, 0.4);
+                transform: translateY(-15px) rotate(2deg) rotateX(5deg);
+                box-shadow: 0 20px 45px rgba(79, 195, 247, 0.5);
             }
         }
 
         .imagen-centrada:hover {
             animation: none;
-            transform: scale(1.05) rotate(2deg);
+            transform: scale(1.05) rotate(5deg) rotateY(10deg);
             filter: brightness(100%) contrast(110%) hue-rotate(-5deg);
-            box-shadow: 0 15px 35px rgba(79, 195, 247, 0.6);
+            box-shadow: 0 25px 50px rgba(79, 195, 247, 0.7);
+            border-radius: 8px;
         }
         
         .centered-text {
@@ -338,6 +425,12 @@
             font-style: italic;
             color: var(--azul-oscuro);
             font-size: 1.2rem;
+            transition: all 0.4s ease;
+        }
+
+        .centered-text:hover {
+            transform: scale(1.05);
+            color: var(--azul-secundario);
         }
 
         .centered-text::before,
@@ -349,16 +442,19 @@
             font-size: 1.5rem;
             color: var(--azul-primario);
             opacity: 0.6;
+            transition: all 0.4s ease;
         }
 
-        .centered-text::before {
-            left: 10%;
+        .centered-text:hover::before {
+            transform: translateY(-50%) translateX(-15px) rotate(-20deg);
+            opacity: 1;
         }
 
-        .centered-text::after {
-            right: 10%;
+        .centered-text:hover::after {
+            transform: translateY(-50%) translateX(15px) rotate(20deg);
+            opacity: 1;
         }
-        
+
         .winter-btn {
             display: inline-block;
             background: linear-gradient(to right, var(--azul-primario), var(--azul-secundario));
@@ -368,8 +464,8 @@
             font-weight: 600;
             letter-spacing: 1px;
             margin: 20px 5px;
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 0 var(--azul-oscuro);
+            transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+            box-shadow: 0 6px 0 var(--azul-oscuro);
             border: none;
             cursor: pointer;
             position: relative;
@@ -377,6 +473,7 @@
             z-index: 1;
             font-family: 'Playfair Display', serif;
             font-size: 1.1rem;
+            transform-style: preserve-3d;
         }
 
         .winter-btn::before {
@@ -386,14 +483,14 @@
             left: -100%;
             width: 100%;
             height: 100%;
-            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
-            transition: all 0.5s ease;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.3), transparent);
+            transition: all 0.6s ease;
             z-index: -1;
         }
         
         .winter-btn:hover {
-            transform: translateY(-3px);
-            box-shadow: 0 6px 0 var(--azul-oscuro);
+            transform: translateY(-5px) rotateX(10deg);
+            box-shadow: 0 10px 0 var(--azul-oscuro);
             background: linear-gradient(to right, var(--azul-neon), var(--azul-primario));
         }
 
@@ -402,31 +499,67 @@
         }
         
         .winter-btn:active {
-            transform: translateY(1px);
-            box-shadow: 0 2px 0 var(--azul-oscuro);
+            transform: translateY(2px) rotateX(0deg);
+            box-shadow: 0 3px 0 var(--azul-oscuro);
         }
 
         .pulse {
-            animation: pulseBtn 1.5s infinite alternate;
+            animation: pulseBtn 1.2s infinite alternate;
         }
         
         @keyframes pulseBtn {
-            0% { transform: translateY(0); box-shadow: 0 4px 0 var(--azul-oscuro); }
-            100% { transform: translateY(-3px); box-shadow: 0 6px 0 var(--azul-oscuro), 0 0 15px rgba(79, 195, 247, 0.5); }
+            0% { 
+                transform: translateY(0) rotateX(0deg);
+                box-shadow: 0 6px 0 var(--azul-oscuro); 
+            }
+            100% { 
+                transform: translateY(-5px) rotateX(10deg);
+                box-shadow: 0 10px 0 var(--azul-oscuro), 0 0 20px rgba(79, 195, 247, 0.7); 
+            }
         }
 
-        /* Muñeco de nieve decorativo */
+        /* Muñeco de nieve decorativo con animación */
         .snowman {
             position: fixed;
             bottom: 20px;
             right: 50px;
             width: 100px;
             z-index: -1;
-            opacity: 0.8;
+            opacity: 0.9;
+            animation: snowmanFloat 4s ease-in-out infinite;
+        }
+
+        @keyframes snowmanFloat {
+            0%, 100% { transform: translateY(0) rotate(0deg); }
+            50% { transform: translateY(-15px) rotate(2deg); }
         }
 
         .snowman svg {
-            filter: drop-shadow(2px 4px 6px rgba(0,0,0,0.2));
+            filter: drop-shadow(2px 4px 8px rgba(0,0,0,0.3));
+        }
+
+        /* Efecto de nieve acumulada en los bordes */
+        .snow-accumulation {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            background-image: 
+                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path fill="%23FFFFFF" d="M0,100 Q25,80 50,100 Q75,80 100,100 Z"/></svg>'),
+                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><path fill="%23FFFFFF" d="M0,0 Q25,20 50,0 Q75,20 100,0 Z"/></svg>');
+            background-repeat: repeat-x;
+            background-position: bottom, top;
+            background-size: 200px 30px;
+            opacity: 0.3;
+            animation: snowAccumulation 60s linear infinite;
+        }
+
+        @keyframes snowAccumulation {
+            0% { background-position-x: 0, 100px; }
+            100% { background-position-x: -200px, 300px; }
         }
 
         @media (max-width: 768px) {
@@ -452,8 +585,8 @@
             }
             
             .snowflake {
-                width: 15px;
-                height: 15px;
+                width: 18px;
+                height: 18px;
             }
             
             .snowman-float {
@@ -464,6 +597,9 @@
     </style>
 </head>
 <body>
+    <!-- Efecto de nieve acumulada -->
+    <div class="snow-accumulation"></div>
+
     <!-- Copos de nieve -->
     <div class="snowflake" style="left: 10%; animation-duration: 18s; animation-delay: 0s;"></div>
     <div class="snowflake" style="left: 30%; animation-duration: 22s; animation-delay: 3s; transform: scale(1.2);"></div>
@@ -522,7 +658,7 @@
 
     <header>
         <div class="container">
-            <h1>Yanina Rosalinda Quispe Choque</h1>
+            <h1>Shyrly Zarai Pacco Cruz</h1>
             <p class="subtitle">« Como un copo de nieve en el viento invernal »</p>
         </div>
     </header>
@@ -531,7 +667,7 @@
         <!-- Sección de imagen -->
         <section id="profile">
             <div class="centered-text">
-                Mi Rumbo Universitario 
+                Mi Viaje Universitario Invernal
             </div>
             <img src="Abril.jpg" alt="Shyrly Zarai" class="imagen-centrada">
             <div class="centered-text">
@@ -544,8 +680,8 @@
         <section id="personal-info">
             <h2>Datos Personales</h2>
             <ul>
-                <li><strong>Nombre:</strong> Yanina Rosalinda Quispe Choque</li>
-                <li><strong>Carrera:</strong> Administracion</li>
+                <li><strong>Nombre:</strong> Shyrly Zarai Pacco Cruz</li>
+                <li><strong>Carrera:</strong> Contabilidad</li>
                 <li><strong>Universidad:</strong> Universidad Católica San Pablo</li>
                 <li><strong>Semestre Actual:</strong> Cuarto Semestre</li>
                 <li><strong>Lema:</strong> Como los copos de nieve, cada uno es único</li>
@@ -555,22 +691,22 @@
         <section id="current-courses">
             <h2>Cursos en Estudio</h2>
             <ul>
-                <li><strong>Antropologia Filosofica y Teologia</strong>
-                    <p>Maestro: <a href="https://www.linkedin.com/in/jose-luis-cadillo-begazo-48994189/">Jose Luis Begazo de la Torre</a></p>
+                <li><strong>Moral</strong>
+                    <p>Maestro: <a href="https://www.linkedin.com/in/joseph-zea-castillo-37065b264/">Jose Efrain Zea Castillo</a></p>
                 </li>
-                <li><strong>Calculo en una Variable</strong>
-                    <p>Maestro: <a href="https://www.linkedin.com/in/marianela-quiroz-450332104/">Maribel Marianela Quiroz Zegarra</a></p>
+                <li><strong>Calculo en Varias Variables</strong>
+                    <p>Maestro: <a href="https://www.linkedin.com/in/matilde-pe%C3%B1a-casa-b93b46230/">Maltilde Peña Casa</a></p>
                 </li>
-                <li><strong>Logica y Argunmentacion</strong>
-                    <p>Maestro: <a href="https://www.linkedin.com/in/gisselle-de-la-cruz-ita/">Kristel Gisselle Loayza Cruz</a></p>
+                <li><strong>Pensamiento Computacional</strong>
+                    <p>Maestro: <a href="https://www.linkedin.com/in/ecuadrosv/">Ernesto Cuadros-Vargas</a></p>
                 </li>
-                <li><strong>Costos y Planeamiento Presupuestal</strong>
-                    <p>Maestra: <a href="https://www.linkedin.com/in/jos%C3%A9-alfredo-d%C3%ADaz-flores-0327a6b4/">Jose Alfredo Diaz Flores</a></p>
+                <li><strong>Contabilidad III</strong>
+                    <p>Maestra: <a href="https://www.linkedin.com/in/jesus-atencio-muchica-3bb31235/">Jesus Conrado Atencio Muchica</a></p>
                 </li>
-                <li><strong>Estadistica y Probabilidades</strong>
-                    <p>Maestro: <a href="https://www.linkedin.com/in/daniel-huanca-ardiles-b898856a/">Daniel Huanca Mosaja</a></p>
+                <li><strong>Legislacion Laboral</strong>
+                    <p>Maestro: <a href="https://www.linkedin.com/in/giovanna-m-garc%C3%ADa-jarufe/">Giovanna Maria Jarufe Garcias</a></p>
                 </li>
-                <li><strong>Analisis y Datos i</strong>
+                <li><strong>Legislacion Auditoria y Tributaria</strong>
                     <p>Maestro: <a href="https://www.linkedin.com/in/sebastian-amat-y-le%C3%B3n-arispe-0a198a32/">Juan Sebastian Arispe Amat y Leon</a></p>
                 </li>
             </ul>
@@ -593,26 +729,36 @@
     </footer>
 
     <script>
-        // Crear más copos de nieve y muñecos
+        // Crear más copos de nieve y muñecos con mejor rendimiento
         function createWinterElements() {
             // Copos de nieve
             for (let i = 0; i < 3; i++) {
                 setTimeout(() => {
                     const flake = document.createElement('div');
                     flake.className = 'snowflake';
-                    flake.style.left = Math.random() * 100 + 'vw';
-                    flake.style.animationDuration = (Math.random() * 15 + 15) + 's';
-                    flake.style.animationDelay = (Math.random() * 5) + 's';
-                    flake.style.opacity = Math.random() * 0.5 + 0.4;
-                    flake.style.transform = `scale(${Math.random() * 0.5 + 1})`;
-                    flake.style.width = (Math.random() * 20 + 15) + 'px';
-                    flake.style.height = (Math.random() * 20 + 15) + 'px';
+                    
+                    // Posición y animación aleatoria
+                    const left = Math.random() * 100;
+                    const duration = Math.random() * 15 + 15;
+                    const delay = Math.random() * 5;
+                    const size = Math.random() * 0.5 + 0.8;
+                    
+                    flake.style.cssText = `
+                        left: ${left}vw;
+                        animation-duration: ${duration}s;
+                        animation-delay: ${delay}s;
+                        transform: scale(${size});
+                        width: ${Math.random() * 10 + 15}px;
+                        height: ${Math.random() * 10 + 15}px;
+                        opacity: ${Math.random() * 0.3 + 0.6};
+                    `;
                     
                     document.body.appendChild(flake);
 
+                    // Eliminar después de la animación
                     setTimeout(() => {
                         flake.remove();
-                    }, 40000);
+                    }, duration * 1000);
                 }, i * 3000);
             }
             
@@ -621,120 +767,78 @@
                 setTimeout(() => {
                     const snowman = document.createElement('div');
                     snowman.className = 'snowman-float';
-                    snowman.style.left = Math.random() * 100 + 'vw';
-                    snowman.style.animationDuration = (Math.random() * 20 + 20) + 's';
-                    snowman.style.animationDelay = (Math.random() * 5) + 's';
-                    snowman.style.opacity = Math.random() * 0.4 + 0.3;
-                    snowman.style.width = (Math.random() * 40 + 60) + 'px';
+                    
+                    const left = Math.random() * 70 + 15;
+                    const duration = Math.random() * 15 + 15;
+                    const delay = Math.random() * 5;
+                    const size = Math.random() * 0.3 + 0.9;
+                    
+                    snowman.style.cssText = `
+                        left: ${left}%;
+                        animation-duration: ${duration}s;
+                        animation-delay: ${delay}s;
+                        transform: scale(${size});
+                        opacity: ${Math.random() * 0.3 + 0.5};
+                    `;
                     
                     // SVG del muñeco de nieve
-                    const svgNS = "http://www.w3.org/2000/svg";
-                    const svg = document.createElementNS(svgNS, "svg");
-                    svg.setAttribute("viewBox", "0 0 100 150");
-                    svg.setAttribute("xmlns", svgNS);
+                    snowman.innerHTML = `
+                        <svg viewBox="0 0 80 120" xmlns="http://www.w3.org/2000/svg">
+                            <circle cx="40" cy="90" r="25" fill="white" stroke="#01579B" stroke-width="1.5"/>
+                            <circle cx="40" cy="70" r="20" fill="white" stroke="#01579B" stroke-width="1.5"/>
+                            <circle cx="40" cy="40" r="15" fill="white" stroke="#01579B" stroke-width="1.5"/>
+                            <circle cx="35" cy="35" r="2" fill="#01579B"/>
+                            <circle cx="45" cy="35" r="2" fill="#01579B"/>
+                            <path d="M32 45 Q40 50 48 45" stroke="#01579B" fill="transparent" stroke-width="1.5"/>
+                            <line x1="15" y1="70" x2="5" y2="65" stroke="#8D6E63" stroke-width="2"/>
+                            <line x1="65" y1="70" x2="75" y2="65" stroke="#8D6E63" stroke-width="2"/>
+                            <circle cx="40" cy="80" r="2" fill="#01579B"/>
+                            <circle cx="40" cy="90" r="2" fill="#01579B"/>
+                        </svg>
+                    `;
                     
-                    // Cuerpo del muñeco
-                    const body1 = document.createElementNS(svgNS, "circle");
-                    body1.setAttribute("cx", "50");
-                    body1.setAttribute("cy", "120");
-                    body1.setAttribute("r", "30");
-                    body1.setAttribute("fill", "white");
-                    body1.setAttribute("stroke", "#01579B");
-                    body1.setAttribute("stroke-width", "1.5");
-                    
-                    const body2 = document.createElementNS(svgNS, "circle");
-                    body2.setAttribute("cx", "50");
-                    body2.setAttribute("cy", "70");
-                    body2.setAttribute("r", "22");
-                    body2.setAttribute("fill", "white");
-                    body2.setAttribute("stroke", "#01579B");
-                    body2.setAttribute("stroke-width", "1.5");
-                    
-                    const head = document.createElementNS(svgNS, "circle");
-                    head.setAttribute("cx", "50");
-                    head.setAttribute("cy", "35");
-                    head.setAttribute("r", "15");
-                    head.setAttribute("fill", "white");
-                    head.setAttribute("stroke", "#01579B");
-                    head.setAttribute("stroke-width", "1.5");
-                    
-                    // Cara
-                    const eye1 = document.createElementNS(svgNS, "circle");
-                    eye1.setAttribute("cx", "45");
-                    eye1.setAttribute("cy", "30");
-                    eye1.setAttribute("r", "2");
-                    eye1.setAttribute("fill", "#01579B");
-                    
-                    const eye2 = document.createElementNS(svgNS, "circle");
-                    eye2.setAttribute("cx", "55");
-                    eye2.setAttribute("cy", "30");
-                    eye2.setAttribute("r", "2");
-                    eye2.setAttribute("fill", "#01579B");
-                    
-                    const mouth = document.createElementNS(svgNS, "path");
-                    mouth.setAttribute("d", "M42 40 Q50 45 58 40");
-                    mouth.setAttribute("stroke", "#01579B");
-                    mouth.setAttribute("fill", "transparent");
-                    mouth.setAttribute("stroke-width", "1.5");
-                    
-                    // Brazos
-                    const arm1 = document.createElementNS(svgNS, "line");
-                    arm1.setAttribute("x1", "20");
-                    arm1.setAttribute("y1", "70");
-                    arm1.setAttribute("x2", "5");
-                    arm1.setAttribute("y2", "60");
-                    arm1.setAttribute("stroke", "#8D6E63");
-                    arm1.setAttribute("stroke-width", "3");
-                    
-                    const arm2 = document.createElementNS(svgNS, "line");
-                    arm2.setAttribute("x1", "80");
-                    arm2.setAttribute("y1", "70");
-                    arm2.setAttribute("x2", "95");
-                    arm2.setAttribute("y2", "60");
-                    arm2.setAttribute("stroke", "#8D6E63");
-                    arm2.setAttribute("stroke-width", "3");
-                    
-                    // Sombrero
-                    const hat1 = document.createElementNS(svgNS, "rect");
-                    hat1.setAttribute("x", "35");
-                    hat1.setAttribute("y", "10");
-                    hat1.setAttribute("width", "30");
-                    hat1.setAttribute("height", "5");
-                    hat1.setAttribute("fill", "#01579B");
-                    
-                    const hat2 = document.createElementNS(svgNS, "rect");
-                    hat2.setAttribute("x", "40");
-                    hat2.setAttribute("y", "5");
-                    hat2.setAttribute("width", "20");
-                    hat2.setAttribute("height", "10");
-                    hat2.setAttribute("fill", "#01579B");
-                    
-                    // Ensamblar SVG
-                    svg.appendChild(body1);
-                    svg.appendChild(body2);
-                    svg.appendChild(head);
-                    svg.appendChild(eye1);
-                    svg.appendChild(eye2);
-                    svg.appendChild(mouth);
-                    svg.appendChild(arm1);
-                    svg.appendChild(arm2);
-                    svg.appendChild(hat1);
-                    svg.appendChild(hat2);
-                    
-                    snowman.appendChild(svg);
                     document.body.appendChild(snowman);
 
+                    // Eliminar después de la animación
                     setTimeout(() => {
                         snowman.remove();
-                    }, 50000);
-                }, i * 3500);
+                    }, duration * 1000);
+                }, i * 4000);
             }
         }
 
-        // Efecto de botones invernales
+        // Efecto de botones invernales mejorado
         document.querySelectorAll('.winter-btn').forEach(button => {
             button.addEventListener('mouseenter', () => {
                 button.classList.add('pulse');
+                
+                // Crear efecto de partículas de nieve
+                for (let i = 0; i < 5; i++) {
+                    const particle = document.createElement('div');
+                    particle.className = 'snowflake';
+                    particle.style.position = 'absolute';
+                    particle.style.left = `${Math.random() * 100}%`;
+                    particle.style.top = `${Math.random() * 100}%`;
+                    particle.style.animation = 'none';
+                    particle.style.opacity = '0.8';
+                    particle.style.width = '10px';
+                    particle.style.height = '10px';
+                    particle.style.transform = 'scale(0)';
+                    
+                    button.appendChild(particle);
+                    
+                    // Animación de las partículas
+                    setTimeout(() => {
+                        particle.style.transition = 'all 0.5s ease-out';
+                        particle.style.transform = 'scale(1) translateY(-50px)';
+                        particle.style.opacity = '0';
+                        
+                        // Eliminar después de la animación
+                        setTimeout(() => {
+                            particle.remove();
+                        }, 500);
+                    }, 10);
+                }
             });
             
             button.addEventListener('mouseleave', () => {
@@ -742,12 +846,86 @@
             });
             
             button.addEventListener('click', () => {
-                button.style.transform = 'translateY(2px)';
-                button.style.boxShadow = '0 2px 0 var(--azul-oscuro)';
+                button.style.transform = 'translateY(2px) rotateX(0deg)';
+                button.style.boxShadow = '0 3px 0 var(--azul-oscuro)';
+                
+                // Efecto de onda al hacer clic
+                const wave = document.createElement('div');
+                wave.style.position = 'absolute';
+                wave.style.borderRadius = '50%';
+                wave.style.backgroundColor = 'rgba(255,255,255,0.3)';
+                wave.style.width = '10px';
+                wave.style.height = '10px';
+                wave.style.left = '50%';
+                wave.style.top = '50%';
+                wave.style.transform = 'translate(-50%, -50%)';
+                wave.style.pointerEvents = 'none';
+                wave.style.zIndex = '-1';
+                
+                button.appendChild(wave);
+                
+                // Animación de la onda
                 setTimeout(() => {
-                    button.style.transform = 'translateY(-3px)';
-                    button.style.boxShadow = '0 6px 0 var(--azul-oscuro), 0 0 15px rgba(79, 195, 247, 0.5)';
+                    wave.style.transition = 'all 0.6s ease-out';
+                    wave.style.width = '200px';
+                    wave.style.height = '200px';
+                    wave.style.opacity = '0';
+                    wave.style.marginTop = '-100px';
+                    wave.style.marginLeft = '-100px';
+                    
+                    // Eliminar después de la animación
+                    setTimeout(() => {
+                        wave.remove();
+                    }, 600);
+                }, 10);
+                
+                setTimeout(() => {
+                    button.style.transform = 'translateY(-5px) rotateX(10deg)';
+                    button.style.boxShadow = '0 10px 0 var(--azul-oscuro), 0 0 20px rgba(79, 195, 247, 0.7)';
                 }, 200);
+            });
+        });
+
+        // Efecto de hover en los títulos
+        document.querySelectorAll('h2').forEach(title => {
+            title.addEventListener('mouseenter', () => {
+                // Crear copos de nieve alrededor del título
+                for (let i = 0; i < 8; i++) {
+                    const flake = document.createElement('div');
+                    flake.className = 'snowflake';
+                    flake.style.position = 'absolute';
+                    flake.style.animation = 'none';
+                    flake.style.width = '15px';
+                    flake.style.height = '15px';
+                    flake.style.opacity = '0';
+                    flake.style.transition = 'all 0.5s ease-out';
+                    
+                    // Posición inicial alrededor del título
+                    const rect = title.getBoundingClientRect();
+                    const angle = (i / 8) * Math.PI * 2;
+                    const radius = 30;
+                    const x = rect.left + rect.width/2 + Math.cos(angle) * radius - 7.5;
+                    const y = rect.top + rect.height/2 + Math.sin(angle) * radius - 7.5;
+                    
+                    flake.style.left = `${x}px`;
+                    flake.style.top = `${y}px`;
+                    
+                    document.body.appendChild(flake);
+                    
+                    // Animación de entrada
+                    setTimeout(() => {
+                        flake.style.opacity = '0.8';
+                        flake.style.transform = `translate(${Math.cos(angle) * 30}px, ${Math.sin(angle) * 30}px) rotate(360deg)`;
+                        
+                        // Eliminar después de la animación
+                        setTimeout(() => {
+                            flake.style.opacity = '0';
+                            setTimeout(() => {
+                                flake.remove();
+                            }, 500);
+                        }, 1000);
+                    }, i * 100);
+                }
             });
         });
 
@@ -756,17 +934,17 @@
             createWinterElements();
             setInterval(createWinterElements, 10000);
             
-            // Efecto de título pulsante
+            // Efecto de título pulsante mejorado
             const title = document.querySelector('h1');
             setInterval(() => {
                 title.style.animation = 'none';
                 setTimeout(() => {
-                    title.style.animation = 'pulseTitle 2s infinite alternate';
+                    title.style.animation = 'titleGlow 3s infinite alternate';
                 }, 10);
             }, 5000);
         });
 
-        // Efecto de movimiento al pasar el mouse
+        // Efecto de movimiento al pasar el mouse mejorado
         document.addEventListener('mousemove', (e) => {
             const elements = document.querySelectorAll('.snowflake, .snowman-float');
             elements.forEach(el => {
@@ -775,9 +953,16 @@
                 const y = rect.top + rect.height/2;
                 const distance = Math.sqrt(Math.pow(e.clientX - x, 2) + Math.pow(e.clientY - y, 2));
                 
-                if (distance < 150) {
-                    const scale = 1 + (100 - distance) / 100;
-                    el.style.transform = `translate(${(e.clientX - x)/8}px, ${(e.clientY - y)/8}px) scale(${scale})`;
+                if (distance < 200) {
+                    const angle = Math.atan2(e.clientY - y, e.clientX - x);
+                    const force = (200 - distance) / 20;
+                    const currentTransform = el.style.transform.match(/scale\(([^)]+)\)/) || ['', '1'];
+                    const currentScale = parseFloat(currentTransform[1]) || 1;
+                    
+                    el.style.transform = `translate(${Math.cos(angle) * force}px, ${Math.sin(angle) * force}px) scale(${currentScale})`;
+                    el.style.transition = 'transform 0.1s linear';
+                } else {
+                    el.style.transform = `scale(${el.dataset.originalScale || 1})`;
                 }
             });
         });
