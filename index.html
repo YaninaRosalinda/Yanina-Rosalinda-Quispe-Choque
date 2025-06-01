@@ -29,7 +29,6 @@
             position: relative;
         }
 
-        /* Efecto de cristales de hielo de fondo */
         body::before {
             content: "";
             position: fixed;
@@ -47,7 +46,6 @@
             opacity: 0.4;
         }
 
-        /* Animación de cristales flotantes */
         .ice-crystal {
             position: fixed;
             width: 40px;
@@ -80,7 +78,6 @@
             }
         }
 
-        /* Efecto de aurora boreal */
         .aurora {
             position: fixed;
             top: 0;
@@ -316,35 +313,24 @@
             background-size: 100% 100%;
         }
         
-        /* Avatar con iniciales */
-        .avatar {
+        .profile-image {
+            display: block;
+            margin: 40px auto;
             width: 250px;
             height: 250px;
             border-radius: 50%;
-            background: linear-gradient(135deg, var(--accent-blue), var(--deep-blue));
-            color: white;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 5rem;
-            font-family: 'Playfair Display', serif;
-            margin: 40px auto;
+            object-fit: cover;
+            object-position: center;
             border: 5px solid white;
             box-shadow: 0 20px 40px rgba(0, 51, 102, 0.2);
             transition: all 0.5s ease;
+            filter: brightness(1.05) contrast(1.05);
         }
 
-        .avatar:hover {
+        .profile-image:hover {
             transform: scale(1.05) rotate(2deg);
             box-shadow: 0 25px 50px rgba(0, 102, 153, 0.3);
             border-color: var(--accent-blue);
-        }
-
-        .avatar.small {
-            width: 100px;
-            height: 100px;
-            font-size: 2rem;
-            margin: 0 auto 15px;
         }
         
         .quote {
@@ -358,8 +344,7 @@
             padding: 0 20%;
         }
 
-        .quote::before,
-        .quote::after {
+        .quote::before, .quote::after {
             content: '"';
             font-size: 2rem;
             color: var(--accent-blue);
@@ -421,7 +406,7 @@
             box-shadow: 0 5px 15px rgba(0, 51, 102, 0.3);
         }
 
-        /* Tarjetas de compañeros */
+        /* Tarjetas de compañeros (MODIFICADO) */
         .classmate-card {
             display: inline-block;
             background: white;
@@ -440,22 +425,19 @@
             box-shadow: 0 15px 40px rgba(0, 102, 153, 0.2);
         }
 
-        .classmate-card h3 {
-            color: var(--deep-blue);
-            margin: 10px 0;
+        /* Avatar con iniciales (NUEVO) */
+        .avatar-iniciales {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 15px;
+            color: white;
+            font-size: 2rem;
             font-family: 'Playfair Display', serif;
-        }
-
-        .classmate-card p {
-            color: var(--text-dark);
-            opacity: 0.8;
-            font-size: 0.9rem;
-        }
-
-        .classmate-card .btn {
-            padding: 8px 20px;
-            font-size: 0.9rem;
-            margin-top: 15px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
 
         .classmates-container {
@@ -465,7 +447,6 @@
             margin-top: 30px;
         }
 
-        /* Efecto de cristales en el hover */
         .crystal-hover {
             position: relative;
             overflow: hidden;
@@ -508,10 +489,9 @@
                 padding: 0 10%;
             }
             
-            .avatar {
+            .profile-image {
                 width: 200px;
                 height: 200px;
-                font-size: 4rem;
             }
             
             .classmate-card {
@@ -539,7 +519,9 @@
         </div>
     </header>
 
-    <section id="profile" class="crystal-hover">
+    <div class="container">
+        <!-- Sección de perfil (CON IMAGEN ORIGINAL) -->
+        <section id="profile" class="crystal-hover">
             <img src="invierno.jpg" alt="Yanina Rosalinda" class="profile-image">
             <div class="quote">
                 Cada invierno tiene su primavera, cada esfuerzo su recompensa
@@ -587,18 +569,18 @@
             </ul>
         </section>
 
-        <!-- Sección de compañeros -->
+        <!-- Sección de compañeros (MODIFICADA) -->
         <section id="classmates" class="crystal-hover">
             <h2>Compañeros de Estudio</h2>
             <div class="classmates-container">
                 <div class="classmate-card">
-                    <div class="avatar small">NG</div>
+                    <div class="avatar-iniciales" style="background-color: #4DA6FF;">NG</div>
                     <h3>Nicole Galdós</h3>
                     <p>Administración de Negocios</p>
                     <a href="https://nicolegaldos.neocities.org" class="btn" target="_blank">Ver perfil</a>
                 </div>
                 <div class="classmate-card">
-                    <div class="avatar small">RB</div>
+                    <div class="avatar-iniciales" style="background-color: #0288D1;">RB</div>
                     <h3>Ruth Barriga</h3>
                     <p>Contabilidad</p>
                     <a href="https://ruthmerybg.github.io/RuthMeryBarrigaVera/" class="btn" target="_blank">Ver perfil</a>
